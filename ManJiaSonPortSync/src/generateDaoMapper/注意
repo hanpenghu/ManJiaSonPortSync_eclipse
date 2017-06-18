@@ -1,0 +1,2 @@
+xmlMapper中生成的NVARCHAR必须全部改成VARCHAR
+否则连接数据库获得数据出错

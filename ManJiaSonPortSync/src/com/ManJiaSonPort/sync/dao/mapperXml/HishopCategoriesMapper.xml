@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ManJiaSonPort.sync.dao.mapperJava.HishopCategoriesMapper">
+  <resultMap id="BaseResultMap" type="com.ManJiaSonPort.sync.dto.HishopCategories">
+    <id column="CategoryId" jdbcType="INTEGER" property="categoryid" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="DisplaySequence" jdbcType="INTEGER" property="displaysequence" />
+    <result column="Meta_Title" jdbcType="VARCHAR" property="metaTitle" />
+    <result column="Meta_Description" jdbcType="VARCHAR" property="metaDescription" />
+    <result column="Meta_Keywords" jdbcType="VARCHAR" property="metaKeywords" />
+    <result column="ParentCategoryId" jdbcType="INTEGER" property="parentcategoryid" />
+    <result column="Depth" jdbcType="INTEGER" property="depth" />
+    <result column="Path" jdbcType="VARCHAR" property="path" />
+    <result column="RewriteName" jdbcType="VARCHAR" property="rewritename" />
+    <result column="SKUPrefix" jdbcType="VARCHAR" property="skuprefix" />
+    <result column="AssociatedProductType" jdbcType="INTEGER" property="associatedproducttype" />
+    <result column="Theme" jdbcType="VARCHAR" property="theme" />
+    <result column="HasChildren" jdbcType="BIT" property="haschildren" />
+    <result column="Icon" jdbcType="VARCHAR" property="icon" />
+    <result column="BigImageUrl" jdbcType="VARCHAR" property="bigimageurl" />
+    <result column="TenantID" jdbcType="INTEGER" property="tenantid" />
+    <result column="guid" jdbcType="VARCHAR" property="guid" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ManJiaSonPort.sync.dto.HishopCategoriesWithBLOBs">
+    <result column="Notes1" jdbcType="LONGVARCHAR" property="notes1" />
+    <result column="Notes2" jdbcType="LONGVARCHAR" property="notes2" />
+    <result column="Notes3" jdbcType="LONGVARCHAR" property="notes3" />
+    <result column="Notes4" jdbcType="LONGVARCHAR" property="notes4" />
+    <result column="Notes5" jdbcType="LONGVARCHAR" property="notes5" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    CategoryId, Name, DisplaySequence, Meta_Title, Meta_Description, Meta_Keywords, ParentCategoryId, 
+    Depth, Path, RewriteName, SKUPrefix, AssociatedProductType, Theme, HasChildren, Icon, 
+    BigImageUrl, TenantID, guid
+  </sql>
+  <sql id="Blob_Column_List">
+    Notes1, Notes2, Notes3, Notes4, Notes5
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.ManJiaSonPort.sync.dto.HishopCategoriesExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Hishop_Categories
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.ManJiaSonPort.sync.dto.HishopCategoriesExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from Hishop_Categories
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Hishop_Categories
+    where CategoryId = #{categoryid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from Hishop_Categories
+    where CategoryId = #{categoryid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ManJiaSonPort.sync.dto.HishopCategoriesExample">
+    delete from Hishop_Categories
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ManJiaSonPort.sync.dto.HishopCategoriesWithBLOBs">
+    insert into Hishop_Categories (CategoryId, Name, DisplaySequence, 
+      Meta_Title, Meta_Description, Meta_Keywords, 
+      ParentCategoryId, Depth, Path, 
+      RewriteName, SKUPrefix, AssociatedProductType, 
+      Theme, HasChildren, Icon, 
+      BigImageUrl, TenantID, guid, 
+      Notes1, Notes2, Notes3, 
+      Notes4, Notes5)
+    values (#{categoryid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{displaysequence,jdbcType=INTEGER}, 
+      #{metaTitle,jdbcType=VARCHAR}, #{metaDescription,jdbcType=VARCHAR}, #{metaKeywords,jdbcType=VARCHAR}, 
+      #{parentcategoryid,jdbcType=INTEGER}, #{depth,jdbcType=INTEGER}, #{path,jdbcType=VARCHAR}, 
+      #{rewritename,jdbcType=VARCHAR}, #{skuprefix,jdbcType=VARCHAR}, #{associatedproducttype,jdbcType=INTEGER}, 
+      #{theme,jdbcType=VARCHAR}, #{haschildren,jdbcType=BIT}, #{icon,jdbcType=VARCHAR}, 
+      #{bigimageurl,jdbcType=VARCHAR}, #{tenantid,jdbcType=INTEGER}, #{guid,jdbcType=VARCHAR}, 
+      #{notes1,jdbcType=LONGVARCHAR}, #{notes2,jdbcType=LONGVARCHAR}, #{notes3,jdbcType=LONGVARCHAR}, 
+      #{notes4,jdbcType=LONGVARCHAR}, #{notes5,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ManJiaSonPort.sync.dto.HishopCategoriesWithBLOBs">
+    insert into Hishop_Categories
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="categoryid != null">
+        CategoryId,
+      </if>
+      <if test="name != null">
+        Name,
+      </if>
+      <if test="displaysequence != null">
+        DisplaySequence,
+      </if>
+      <if test="metaTitle != null">
+        Meta_Title,
+      </if>
+      <if test="metaDescription != null">
+        Meta_Description,
+      </if>
+      <if test="metaKeywords != null">
+        Meta_Keywords,
+      </if>
+      <if test="parentcategoryid != null">
+        ParentCategoryId,
+      </if>
+      <if test="depth != null">
+        Depth,
+      </if>
+      <if test="path != null">
+        Path,
+      </if>
+      <if test="rewritename != null">
+        RewriteName,
+      </if>
+      <if test="skuprefix != null">
+        SKUPrefix,
+      </if>
+      <if test="associatedproducttype != null">
+        AssociatedProductType,
+      </if>
+      <if test="theme != null">
+        Theme,
+      </if>
+      <if test="haschildren != null">
+        HasChildren,
+      </if>
+      <if test="icon != null">
+        Icon,
+      </if>
+      <if test="bigimageurl != null">
+        BigImageUrl,
+      </if>
+      <if test="tenantid != null">
+        TenantID,
+      </if>
+      <if test="guid != null">
+        guid,
+      </if>
+      <if test="notes1 != null">
+        Notes1,
+      </if>
+      <if test="notes2 != null">
+        Notes2,
+      </if>
+      <if test="notes3 != null">
+        Notes3,
+      </if>
+      <if test="notes4 != null">
+        Notes4,
+      </if>
+      <if test="notes5 != null">
+        Notes5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="categoryid != null">
+        #{categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="displaysequence != null">
+        #{displaysequence,jdbcType=INTEGER},
+      </if>
+      <if test="metaTitle != null">
+        #{metaTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="metaDescription != null">
+        #{metaDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="metaKeywords != null">
+        #{metaKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="parentcategoryid != null">
+        #{parentcategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="depth != null">
+        #{depth,jdbcType=INTEGER},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="rewritename != null">
+        #{rewritename,jdbcType=VARCHAR},
+      </if>
+      <if test="skuprefix != null">
+        #{skuprefix,jdbcType=VARCHAR},
+      </if>
+      <if test="associatedproducttype != null">
+        #{associatedproducttype,jdbcType=INTEGER},
+      </if>
+      <if test="theme != null">
+        #{theme,jdbcType=VARCHAR},
+      </if>
+      <if test="haschildren != null">
+        #{haschildren,jdbcType=BIT},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="bigimageurl != null">
+        #{bigimageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantid != null">
+        #{tenantid,jdbcType=INTEGER},
+      </if>
+      <if test="guid != null">
+        #{guid,jdbcType=VARCHAR},
+      </if>
+      <if test="notes1 != null">
+        #{notes1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="notes2 != null">
+        #{notes2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="notes3 != null">
+        #{notes3,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="notes4 != null">
+        #{notes4,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="notes5 != null">
+        #{notes5,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ManJiaSonPort.sync.dto.HishopCategoriesExample" resultType="java.lang.Long">
+    select count(*) from Hishop_Categories
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update Hishop_Categories
+    <set>
+      <if test="record.categoryid != null">
+        CategoryId = #{record.categoryid,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        Name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.displaysequence != null">
+        DisplaySequence = #{record.displaysequence,jdbcType=INTEGER},
+      </if>
+      <if test="record.metaTitle != null">
+        Meta_Title = #{record.metaTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.metaDescription != null">
+        Meta_Description = #{record.metaDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.metaKeywords != null">
+        Meta_Keywords = #{record.metaKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentcategoryid != null">
+        ParentCategoryId = #{record.parentcategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="record.depth != null">
+        Depth = #{record.depth,jdbcType=INTEGER},
+      </if>
+      <if test="record.path != null">
+        Path = #{record.path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rewritename != null">
+        RewriteName = #{record.rewritename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuprefix != null">
+        SKUPrefix = #{record.skuprefix,jdbcType=VARCHAR},
+      </if>
+      <if test="record.associatedproducttype != null">
+        AssociatedProductType = #{record.associatedproducttype,jdbcType=INTEGER},
+      </if>
+      <if test="record.theme != null">
+        Theme = #{record.theme,jdbcType=VARCHAR},
+      </if>
+      <if test="record.haschildren != null">
+        HasChildren = #{record.haschildren,jdbcType=BIT},
+      </if>
+      <if test="record.icon != null">
+        Icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bigimageurl != null">
+        BigImageUrl = #{record.bigimageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tenantid != null">
+        TenantID = #{record.tenantid,jdbcType=INTEGER},
+      </if>
+      <if test="record.guid != null">
+        guid = #{record.guid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notes1 != null">
+        Notes1 = #{record.notes1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.notes2 != null">
+        Notes2 = #{record.notes2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.notes3 != null">
+        Notes3 = #{record.notes3,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.notes4 != null">
+        Notes4 = #{record.notes4,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.notes5 != null">
+        Notes5 = #{record.notes5,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update Hishop_Categories
+    set CategoryId = #{record.categoryid,jdbcType=INTEGER},
+      Name = #{record.name,jdbcType=VARCHAR},
+      DisplaySequence = #{record.displaysequence,jdbcType=INTEGER},
+      Meta_Title = #{record.metaTitle,jdbcType=VARCHAR},
+      Meta_Description = #{record.metaDescription,jdbcType=VARCHAR},
+      Meta_Keywords = #{record.metaKeywords,jdbcType=VARCHAR},
+      ParentCategoryId = #{record.parentcategoryid,jdbcType=INTEGER},
+      Depth = #{record.depth,jdbcType=INTEGER},
+      Path = #{record.path,jdbcType=VARCHAR},
+      RewriteName = #{record.rewritename,jdbcType=VARCHAR},
+      SKUPrefix = #{record.skuprefix,jdbcType=VARCHAR},
+      AssociatedProductType = #{record.associatedproducttype,jdbcType=INTEGER},
+      Theme = #{record.theme,jdbcType=VARCHAR},
+      HasChildren = #{record.haschildren,jdbcType=BIT},
+      Icon = #{record.icon,jdbcType=VARCHAR},
+      BigImageUrl = #{record.bigimageurl,jdbcType=VARCHAR},
+      TenantID = #{record.tenantid,jdbcType=INTEGER},
+      guid = #{record.guid,jdbcType=VARCHAR},
+      Notes1 = #{record.notes1,jdbcType=LONGVARCHAR},
+      Notes2 = #{record.notes2,jdbcType=LONGVARCHAR},
+      Notes3 = #{record.notes3,jdbcType=LONGVARCHAR},
+      Notes4 = #{record.notes4,jdbcType=LONGVARCHAR},
+      Notes5 = #{record.notes5,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update Hishop_Categories
+    set CategoryId = #{record.categoryid,jdbcType=INTEGER},
+      Name = #{record.name,jdbcType=VARCHAR},
+      DisplaySequence = #{record.displaysequence,jdbcType=INTEGER},
+      Meta_Title = #{record.metaTitle,jdbcType=VARCHAR},
+      Meta_Description = #{record.metaDescription,jdbcType=VARCHAR},
+      Meta_Keywords = #{record.metaKeywords,jdbcType=VARCHAR},
+      ParentCategoryId = #{record.parentcategoryid,jdbcType=INTEGER},
+      Depth = #{record.depth,jdbcType=INTEGER},
+      Path = #{record.path,jdbcType=VARCHAR},
+      RewriteName = #{record.rewritename,jdbcType=VARCHAR},
+      SKUPrefix = #{record.skuprefix,jdbcType=VARCHAR},
+      AssociatedProductType = #{record.associatedproducttype,jdbcType=INTEGER},
+      Theme = #{record.theme,jdbcType=VARCHAR},
+      HasChildren = #{record.haschildren,jdbcType=BIT},
+      Icon = #{record.icon,jdbcType=VARCHAR},
+      BigImageUrl = #{record.bigimageurl,jdbcType=VARCHAR},
+      TenantID = #{record.tenantid,jdbcType=INTEGER},
+      guid = #{record.guid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ManJiaSonPort.sync.dto.HishopCategoriesWithBLOBs">
+    update Hishop_Categories
+    <set>
+      <if test="name != null">
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="displaysequence != null">
+        DisplaySequence = #{displaysequence,jdbcType=INTEGER},
+      </if>
+      <if test="metaTitle != null">
+        Meta_Title = #{metaTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="metaDescription != null">
+        Meta_Description = #{metaDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="metaKeywords != null">
+        Meta_Keywords = #{metaKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="parentcategoryid != null">
+        ParentCategoryId = #{parentcategoryid,jdbcType=INTEGER},
+      </if>
+      <if test="depth != null">
+        Depth = #{depth,jdbcType=INTEGER},
+      </if>
+      <if test="path != null">
+        Path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="rewritename != null">
+        RewriteName = #{rewritename,jdbcType=VARCHAR},
+      </if>
+      <if test="skuprefix != null">
+        SKUPrefix = #{skuprefix,jdbcType=VARCHAR},
+      </if>
+      <if test="associatedproducttype != null">
+        AssociatedProductType = #{associatedproducttype,jdbcType=INTEGER},
+      </if>
+      <if test="theme != null">
+        Theme = #{theme,jdbcType=VARCHAR},
+      </if>
+      <if test="haschildren != null">
+        HasChildren = #{haschildren,jdbcType=BIT},
+      </if>
+      <if test="icon != null">
+        Icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="bigimageurl != null">
+        BigImageUrl = #{bigimageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantid != null">
+        TenantID = #{tenantid,jdbcType=INTEGER},
+      </if>
+      <if test="guid != null">
+        guid = #{guid,jdbcType=VARCHAR},
+      </if>
+      <if test="notes1 != null">
+        Notes1 = #{notes1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="notes2 != null">
+        Notes2 = #{notes2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="notes3 != null">
+        Notes3 = #{notes3,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="notes4 != null">
+        Notes4 = #{notes4,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="notes5 != null">
+        Notes5 = #{notes5,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where CategoryId = #{categoryid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ManJiaSonPort.sync.dto.HishopCategoriesWithBLOBs">
+    update Hishop_Categories
+    set Name = #{name,jdbcType=VARCHAR},
+      DisplaySequence = #{displaysequence,jdbcType=INTEGER},
+      Meta_Title = #{metaTitle,jdbcType=VARCHAR},
+      Meta_Description = #{metaDescription,jdbcType=VARCHAR},
+      Meta_Keywords = #{metaKeywords,jdbcType=VARCHAR},
+      ParentCategoryId = #{parentcategoryid,jdbcType=INTEGER},
+      Depth = #{depth,jdbcType=INTEGER},
+      Path = #{path,jdbcType=VARCHAR},
+      RewriteName = #{rewritename,jdbcType=VARCHAR},
+      SKUPrefix = #{skuprefix,jdbcType=VARCHAR},
+      AssociatedProductType = #{associatedproducttype,jdbcType=INTEGER},
+      Theme = #{theme,jdbcType=VARCHAR},
+      HasChildren = #{haschildren,jdbcType=BIT},
+      Icon = #{icon,jdbcType=VARCHAR},
+      BigImageUrl = #{bigimageurl,jdbcType=VARCHAR},
+      TenantID = #{tenantid,jdbcType=INTEGER},
+      guid = #{guid,jdbcType=VARCHAR},
+      Notes1 = #{notes1,jdbcType=LONGVARCHAR},
+      Notes2 = #{notes2,jdbcType=LONGVARCHAR},
+      Notes3 = #{notes3,jdbcType=LONGVARCHAR},
+      Notes4 = #{notes4,jdbcType=LONGVARCHAR},
+      Notes5 = #{notes5,jdbcType=LONGVARCHAR}
+    where CategoryId = #{categoryid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ManJiaSonPort.sync.dto.HishopCategories">
+    update Hishop_Categories
+    set Name = #{name,jdbcType=VARCHAR},
+      DisplaySequence = #{displaysequence,jdbcType=INTEGER},
+      Meta_Title = #{metaTitle,jdbcType=VARCHAR},
+      Meta_Description = #{metaDescription,jdbcType=VARCHAR},
+      Meta_Keywords = #{metaKeywords,jdbcType=VARCHAR},
+      ParentCategoryId = #{parentcategoryid,jdbcType=INTEGER},
+      Depth = #{depth,jdbcType=INTEGER},
+      Path = #{path,jdbcType=VARCHAR},
+      RewriteName = #{rewritename,jdbcType=VARCHAR},
+      SKUPrefix = #{skuprefix,jdbcType=VARCHAR},
+      AssociatedProductType = #{associatedproducttype,jdbcType=INTEGER},
+      Theme = #{theme,jdbcType=VARCHAR},
+      HasChildren = #{haschildren,jdbcType=BIT},
+      Icon = #{icon,jdbcType=VARCHAR},
+      BigImageUrl = #{bigimageurl,jdbcType=VARCHAR},
+      TenantID = #{tenantid,jdbcType=INTEGER},
+      guid = #{guid,jdbcType=VARCHAR}
+    where CategoryId = #{categoryid,jdbcType=INTEGER}
+  </update>
+  <!--hanhan add   ifExsitThisGuid -->
+  <select id="countThisGuid" parameterType="java.lang.String" resultType="java.lang.Integer">
+    SELECT COUNT(guid) FROM Hishop_Categories WHERE guid = #{guid,jdbcType=VARCHAR}
+  </select>
+</mapper>

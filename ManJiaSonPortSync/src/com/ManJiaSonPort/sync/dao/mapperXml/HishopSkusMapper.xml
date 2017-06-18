@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ManJiaSonPort.sync.dao.mapperJava.HishopSkusMapper">
+  <resultMap id="BaseResultMap" type="com.ManJiaSonPort.sync.dto.HishopSkus">
+    <id column="SkuId" jdbcType="VARCHAR" property="skuid" />
+    <result column="ProductId" jdbcType="INTEGER" property="productid" />
+    <result column="SKU" jdbcType="VARCHAR" property="sku" />
+    <result column="Weight" jdbcType="DECIMAL" property="weight" />
+    <result column="Stock" jdbcType="INTEGER" property="stock" />
+    <result column="WarningStock" jdbcType="INTEGER" property="warningstock" />
+    <result column="CostPrice" jdbcType="DECIMAL" property="costprice" />
+    <result column="SalePrice" jdbcType="DECIMAL" property="saleprice" />
+    <result column="FreezeStock" jdbcType="INTEGER" property="freezestock" />
+    <result column="TenantID" jdbcType="INTEGER" property="tenantid" />
+    <result column="guid" jdbcType="VARCHAR" property="guid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SkuId, ProductId, SKU, Weight, Stock, WarningStock, CostPrice, SalePrice, FreezeStock, 
+    TenantID, guid
+  </sql>
+  <select id="selectByExample" parameterType="com.ManJiaSonPort.sync.dto.HishopSkusExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from Hishop_SKUs
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from Hishop_SKUs
+    where SkuId = #{skuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from Hishop_SKUs
+    where SkuId = #{skuid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ManJiaSonPort.sync.dto.HishopSkusExample">
+    delete from Hishop_SKUs
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ManJiaSonPort.sync.dto.HishopSkus">
+    insert into Hishop_SKUs (SkuId, ProductId, SKU, 
+      Weight, Stock, WarningStock, 
+      CostPrice, SalePrice, FreezeStock, 
+      TenantID, guid)
+    values (#{skuid,jdbcType=VARCHAR}, #{productid,jdbcType=INTEGER}, #{sku,jdbcType=VARCHAR}, 
+      #{weight,jdbcType=DECIMAL}, #{stock,jdbcType=INTEGER}, #{warningstock,jdbcType=INTEGER}, 
+      #{costprice,jdbcType=DECIMAL}, #{saleprice,jdbcType=DECIMAL}, #{freezestock,jdbcType=INTEGER}, 
+      #{tenantid,jdbcType=INTEGER}, #{guid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ManJiaSonPort.sync.dto.HishopSkus">
+    insert into Hishop_SKUs
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuid != null">
+        SkuId,
+      </if>
+      <if test="productid != null">
+        ProductId,
+      </if>
+      <if test="sku != null">
+        SKU,
+      </if>
+      <if test="weight != null">
+        Weight,
+      </if>
+      <if test="stock != null">
+        Stock,
+      </if>
+      <if test="warningstock != null">
+        WarningStock,
+      </if>
+      <if test="costprice != null">
+        CostPrice,
+      </if>
+      <if test="saleprice != null">
+        SalePrice,
+      </if>
+      <if test="freezestock != null">
+        FreezeStock,
+      </if>
+      <if test="tenantid != null">
+        TenantID,
+      </if>
+      <if test="guid != null">
+        guid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuid != null">
+        #{skuid,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null">
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="sku != null">
+        #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="warningstock != null">
+        #{warningstock,jdbcType=INTEGER},
+      </if>
+      <if test="costprice != null">
+        #{costprice,jdbcType=DECIMAL},
+      </if>
+      <if test="saleprice != null">
+        #{saleprice,jdbcType=DECIMAL},
+      </if>
+      <if test="freezestock != null">
+        #{freezestock,jdbcType=INTEGER},
+      </if>
+      <if test="tenantid != null">
+        #{tenantid,jdbcType=INTEGER},
+      </if>
+      <if test="guid != null">
+        #{guid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ManJiaSonPort.sync.dto.HishopSkusExample" resultType="java.lang.Long">
+    select count(*) from Hishop_SKUs
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update Hishop_SKUs
+    <set>
+      <if test="record.skuid != null">
+        SkuId = #{record.skuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productid != null">
+        ProductId = #{record.productid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sku != null">
+        SKU = #{record.sku,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weight != null">
+        Weight = #{record.weight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.stock != null">
+        Stock = #{record.stock,jdbcType=INTEGER},
+      </if>
+      <if test="record.warningstock != null">
+        WarningStock = #{record.warningstock,jdbcType=INTEGER},
+      </if>
+      <if test="record.costprice != null">
+        CostPrice = #{record.costprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.saleprice != null">
+        SalePrice = #{record.saleprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.freezestock != null">
+        FreezeStock = #{record.freezestock,jdbcType=INTEGER},
+      </if>
+      <if test="record.tenantid != null">
+        TenantID = #{record.tenantid,jdbcType=INTEGER},
+      </if>
+      <if test="record.guid != null">
+        guid = #{record.guid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update Hishop_SKUs
+    set SKU = #{record.sku,jdbcType=VARCHAR},
+      Weight = #{record.weight,jdbcType=DECIMAL},
+      Stock = #{record.stock,jdbcType=INTEGER},
+      WarningStock = #{record.warningstock,jdbcType=INTEGER},
+      CostPrice = #{record.costprice,jdbcType=DECIMAL},
+      SalePrice = #{record.saleprice,jdbcType=DECIMAL},
+      FreezeStock = #{record.freezestock,jdbcType=INTEGER},
+      TenantID = #{record.tenantid,jdbcType=INTEGER},
+      guid = #{record.guid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ManJiaSonPort.sync.dto.HishopSkus">
+    update Hishop_SKUs
+    <set>
+      <if test="productid != null">
+        ProductId = #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="sku != null">
+        SKU = #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        Weight = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="stock != null">
+        Stock = #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="warningstock != null">
+        WarningStock = #{warningstock,jdbcType=INTEGER},
+      </if>
+      <if test="costprice != null">
+        CostPrice = #{costprice,jdbcType=DECIMAL},
+      </if>
+      <if test="saleprice != null">
+        SalePrice = #{saleprice,jdbcType=DECIMAL},
+      </if>
+      <if test="freezestock != null">
+        FreezeStock = #{freezestock,jdbcType=INTEGER},
+      </if>
+      <if test="tenantid != null">
+        TenantID = #{tenantid,jdbcType=INTEGER},
+      </if>
+      <if test="guid != null">
+        guid = #{guid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SkuId = #{skuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ManJiaSonPort.sync.dto.HishopSkus">
+    update Hishop_SKUs
+    set ProductId = #{productid,jdbcType=INTEGER},
+      SKU = #{sku,jdbcType=VARCHAR},
+      Weight = #{weight,jdbcType=DECIMAL},
+      Stock = #{stock,jdbcType=INTEGER},
+      WarningStock = #{warningstock,jdbcType=INTEGER},
+      CostPrice = #{costprice,jdbcType=DECIMAL},
+      SalePrice = #{saleprice,jdbcType=DECIMAL},
+      FreezeStock = #{freezestock,jdbcType=INTEGER},
+      TenantID = #{tenantid,jdbcType=INTEGER},
+      guid = #{guid,jdbcType=VARCHAR}
+    where SkuId = #{skuid,jdbcType=VARCHAR}
+  </update>
+
+  <!--hanhan add   ifExsitThisGuid -->
+  <select id="countThisGuid" parameterType="java.lang.String" resultType="java.lang.Integer">
+    SELECT COUNT(guid) FROM Hishop_SKUs WHERE guid = #{guid,jdbcType=VARCHAR}
+  </select>
+
+
+</mapper>
